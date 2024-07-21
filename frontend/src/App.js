@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import './App.css'; // Custom CSS file
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import './App.css'; // Custom CSS file
 
 const App = () => {
   const [nodes, setNodes] = useState([]);
   const [pods, setPods] = useState([]);
   const [deployments, setDeployments] = useState([]);
   const [services, setServices] = useState([]);
+  const [sortKeyPods, setSortKeyPods] = useState('namespace');
+  const [sortKeyDeployments, setSortKeyDeployments] = useState('namespace');
+  const [sortKeyServices, setSortKeyServices] = useState('namespace');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,53 +37,87 @@ const App = () => {
     fetchData();
   }, []);
 
+  const sortItems = (items, key) => {
+    return [...items].sort((a, b) => a[key].localeCompare(b[key]));
+  };
+
   return (
-    <div className="container">
-      <h1 className="text-center my-4">Kubernetes Resources</h1>
+    <div className="container my-5">
+      <h1 className="text-center mb-4">Kubernetes Resources</h1>
 
-      <div className="row">
-        <div className="col-md-6">
-          <h2>Nodes</h2>
-          <ul className="list-group">
-            {nodes.map(node => (
-              <li className="list-group-item" key={node.name}>{node.name}</li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="col-md-6">
-          <h2>Pods</h2>
-          <ul className="list-group">
-            {pods.map(pod => (
-              <li className="list-group-item" key={pod.name}>
-                {pod.name} <span className="badge bg-info text-dark">Namespace: {pod.namespace}</span>
-              </li>
-            ))}
-          </ul>
+      <div className="row mb-4">
+        <div className="col-md-12">
+          <div className="card">
+            <div className="card-header">
+              <h2>Nodes</h2>
+            </div>
+            <ul className="list-group list-group-flush">
+              {nodes.map(node => (
+                <li className="list-group-item" key={node.name}>
+                  {node.name}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div className="row my-4">
-        <div className="col-md-6">
-          <h2>Deployments</h2>
-          <ul className="list-group">
-            {deployments.map(deployment => (
-              <li className="list-group-item" key={deployment.name}>
-                {deployment.name} <span className="badge bg-info text-dark">Namespace: {deployment.namespace}</span>
-              </li>
-            ))}
-          </ul>
+      <div className="row mb-4">
+        <div className="col-md-4">
+          <div className="card">
+            <div className="card-header">
+              <h2>Pods</h2>
+              <div className="btn-group" role="group">
+                <button className="btn btn-outline-primary" onClick={() => setSortKeyPods('namespace')}>Sort by Namespace</button>
+                <button className="btn btn-outline-secondary" onClick={() => setSortKeyPods('name')}>Sort by Name</button>
+              </div>
+            </div>
+            <ul className="list-group list-group-flush">
+              {sortItems(pods, sortKeyPods).map(pod => (
+                <li className="list-group-item" key={pod.name}>
+                  {pod.name} <span className="badge bg-info text-dark">Namespace: {pod.namespace}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        <div className="col-md-6">
-          <h2>Services</h2>
-          <ul className="list-group">
-            {services.map(service => (
-              <li className="list-group-item" key={service.name}>
-                {service.name} <span className="badge bg-info text-dark">Namespace: {service.namespace}</span>
-              </li>
-            ))}
-          </ul>
+        <div className="col-md-4">
+          <div className="card">
+            <div className="card-header">
+              <h2>Deployments</h2>
+              <div className="btn-group" role="group">
+                <button className="btn btn-outline-primary" onClick={() => setSortKeyDeployments('namespace')}>Sort by Namespace</button>
+                <button className="btn btn-outline-secondary" onClick={() => setSortKeyDeployments('name')}>Sort by Name</button>
+              </div>
+            </div>
+            <ul className="list-group list-group-flush">
+              {sortItems(deployments, sortKeyDeployments).map(deployment => (
+                <li className="list-group-item" key={deployment.name}>
+                  {deployment.name} <span className="badge bg-info text-dark">Namespace: {deployment.namespace}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="col-md-4">
+          <div className="card">
+            <div className="card-header">
+              <h2>Services</h2>
+              <div className="btn-group" role="group">
+                <button className="btn btn-outline-primary" onClick={() => setSortKeyServices('namespace')}>Sort by Namespace</button>
+                <button className="btn btn-outline-secondary" onClick={() => setSortKeyServices('name')}>Sort by Name</button>
+              </div>
+            </div>
+            <ul className="list-group list-group-flush">
+              {sortItems(services, sortKeyServices).map(service => (
+                <li className="list-group-item" key={service.name}>
+                  {service.name} <span className="badge bg-info text-dark">Namespace: {service.namespace}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>

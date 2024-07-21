@@ -2,8 +2,16 @@
   margin-top: 20px;
 }
 
-h2 {
-  margin-top: 20px;
+.card {
+  margin-bottom: 20px;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+}
+
+.card-header h2 {
+  margin: 0;
 }
 
 .list-group-item {
@@ -14,4 +22,28 @@ h2 {
 
 .badge {
   font-size: 0.9rem;
+}
+
+.btn-group .btn {
+  margin-right: 5px;
+}
+
+.btn-outline-primary {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-outline-secondary {
+  border-color: #6c757d;
+  color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: #fff;
 }
