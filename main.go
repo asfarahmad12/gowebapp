@@ -1,14 +1,20 @@
 package main
 
 import (
-	"fmt"
+	"encoding/json"
 	"log"
 	"net/http"
 )
 
+type Response struct {
+	Message string `json:"message"`
+}
+
 func homePage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Welcome to the HomePage!")
-	fmt.Println("Endpoint Hit: homePage")
+	response := Response{Message: "Welcome to the HomePage!"}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
+	log.Println("Endpoint Hit: homePage")
 }
 
 func handleRequests() {
