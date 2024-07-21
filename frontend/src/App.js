@@ -3,22 +3,30 @@ import axios from 'axios';
 import './App.css';
 
 function App() {
-  const [message, setMessage] = useState('');
+  const [nodes, setNodes] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/hello')
+    axios.get('http://localhost:8080/api/nodes')
       .then(response => {
-        setMessage(response.data.message);
+        setNodes(response.data);
       })
       .catch(error => {
-        console.error('There was an error fetching the message!', error);
+        setError('There was an error fetching the nodes!');
+        console.error('Error fetching nodes:', error);
       });
   }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>{message}</h1>
+        <h1>Kubernetes Nodes</h1>
+        {error && <p>{error}</p>}
+        <ul>
+          {nodes.map((node, index) => (
+            <li key={index}>{node.name}</li>
+          ))}
+        </ul>
       </header>
     </div>
   );
