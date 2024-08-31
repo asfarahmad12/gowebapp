@@ -1,49 +1,75 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #eaeef1; /* Light background for the entire page */
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
 .container {
-  margin-top: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff; /* White background for the container */
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-align: center;
+  color: #2980b9; /* Blue color for the title */
+  margin-bottom: 30px;
+  font-weight: bold;
+  cursor: pointer; /* Pointer cursor to indicate it's clickable */
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
 }
 
 .card {
-  margin-bottom: 20px;
+  background-color: #ecf0f1;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
-.card-header {
-  background-color: #f8f9fa;
+h3 {
+  color: #34495e;
+  margin-bottom: 15px;
 }
 
-.card-header h2 {
+.list-group {
+  list-style-type: none;
+  padding: 0;
   margin: 0;
 }
 
 .list-group-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 10px;
+  border: none;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.list-group-item:hover {
+  background-color: #dfe6e9;
 }
 
 .badge {
-  font-size: 0.9rem;
+  margin-left: 10px;
 }
 
-.btn-group .btn {
-  margin-right: 5px;
+.loading {
+  text-align: center;
+  margin: 50px 0;
 }
 
-.btn-outline-primary {
-  border-color: #007bff;
-  color: #007bff;
-}
-
-.btn-outline-primary:hover {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.btn-outline-secondary {
-  border-color: #6c757d;
-  color: #6c757d;
-}
-
-.btn-outline-secondary:hover {
-  background-color: #6c757d;
-  color: #fff;
+.alert {
+  margin: 20px 0;
+  text-align: center;
 }

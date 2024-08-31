@@ -1,0 +1,14 @@
+.search-box {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  
+  .search-box:focus {
+    border-color: #2980b9; /* Change border color on focus */
+    outline: none;
+    box-shadow: 0 0 5px rgba(41, 128, 185, 0.5);
+  }
